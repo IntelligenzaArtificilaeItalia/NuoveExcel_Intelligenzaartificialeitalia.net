@@ -11,7 +11,7 @@ from pandasql import sqldf
 import sweetviz as sv
 import base64 
 import tpot
-import tabula
+from tabula import read_pdf
 import html5lib
 import requests
 import time
