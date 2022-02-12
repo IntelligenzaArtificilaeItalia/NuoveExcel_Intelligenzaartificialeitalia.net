@@ -22,7 +22,7 @@ from st_aggrid import AgGrid, DataReturnMode, GridUpdateMode, GridOptionsBuilder
 
 
 timestr = time.strftime("%Y%m%d-%H%M%S")
-st.set_page_config(page_title="AUTO Analisi Esplorativa ( EDA ) by I.A. Italia", page_icon="🔍", layout='wide', initial_sidebar_state='auto')
+st.set_page_config(page_title="Suite Analisi Dati", page_icon="🔍", layout='wide', initial_sidebar_state='auto')
 
 st.markdown("<center><h1> Italian Intelligence Analytic Suite <small><br> Powered by INTELLIGENZAARTIFICIALEITALIA.NET </small></h1>", unsafe_allow_html=True)
 st.write('<p style="text-align: center;font-size:15px;" > <bold>Tutti i tool di Analisi, Pulizia e Visualizzazione Dati in unico Posto <bold>  </bold><p>', unsafe_allow_html=True)
