@@ -18,8 +18,10 @@ import time
 import codecs
 import os
 from st_aggrid import AgGrid, DataReturnMode, GridUpdateMode, GridOptionsBuilder
-
-
+from lazypredict.Supervised import LazyClassifier
+from lazypredict.Supervised import LazyRegressor
+from tpot import TPOTClassifier
+from tpot import TPOTRegressor
 
 timestr = time.strftime("%Y%m%d-%H%M%S")
 st.set_page_config(page_title="Suite Analisi Dati", page_icon="🔍", layout='wide', initial_sidebar_state='auto')
@@ -165,7 +167,7 @@ def AnalyticSuite()  :
 	    		try :
 	    			
 		    		if(tipo_di_problema == "CLASSIFICAZIONE"):
-		    			from lazypredict.Supervised import LazyClassifier
+		    			
 		    			with st.spinner("Dacci un attimo, stiamo provando tutti gli algoritmi di Classificazione sui tuoi dati"):
 			    			clf = LazyClassifier(verbose=0,ignore_warnings=True, custom_metric=None)
 			    			models,predictions = clf.fit(X_train, X_test, y_train, y_test)
@@ -177,7 +179,7 @@ def AnalyticSuite()  :
 			    			st.balloons()
 			    			
 		    		if(tipo_di_problema == "REGRESSIONE"):
-		    			from lazypredict.Supervised import LazyRegressor
+		    			
 		    			with st.spinner("Dacci un attimo, stiamo provando tutti gli algoritmi di Regressione sui tuoi dati"):
 			    			reg = LazyRegressor(verbose=0, ignore_warnings=True, custom_metric=None)
 			    			models, predictions = reg.fit(X_train, X_test, y_train, y_test)
@@ -240,7 +242,7 @@ def AnalyticSuite()  :
 	    		try :
 		    		
 			    	if tipo=="CLASSIFICAZIONE":
-			    		from tpot import TPOTClassifier
+			    		
 			    		with st.spinner("Dacci qualche minuto, stiamo scrivendo il Codice in Python che implementa il miglior algoritmo sui tuoi dati e ottimizzandolo con gli iperparametri. Maggiore è il numero di Generazioni e Popolazione maggiore sarà il tempo di ATTESA..."):
 				    		pipeline_optimizer = TPOTClassifier()
 				    		pipeline_optimizer = TPOTClassifier(generations=gen, population_size=pop, scoring=sel_scor, cv=5,
@@ -258,7 +260,7 @@ def AnalyticSuite()  :
 				    		st.balloons()
 			    		
 			    	if tipo=="REGRESSIONE":
-			    		from tpot import TPOTRegressor
+			    		
 			    		with st.spinner(" Dacci qualche minuto, stiamo scrivendo il Codice in Python che implementa il miglior algoritmo sui tuoi dati e ottimizzandolo con gli iperparametri. Maggiore è il numero di Generazioni e Popolazione maggiore sarà il tempo di ATTESA..."):
 				    		pipeline_optimizer = TPOTRegressor()
 				    		pipeline_optimizer = TPOTRegressor(generations=gen, population_size=pop, scoring=sel_scor, cv=5,
