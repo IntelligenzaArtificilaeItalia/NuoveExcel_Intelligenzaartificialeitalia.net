@@ -1,4 +1,4 @@
-lazypredict==0.2.9
+lazypredict
 requests==2.22.0
 pandas==1.2.0
 tabula_py==2.3.0
