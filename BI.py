@@ -134,7 +134,8 @@ def AnalyticSuite()  :
 			    	app(dataset)
 			    	
 			    	st.balloons()
-	    		except:
+	    		except Exception as e:
+		    		print(e)
 		    		st.error('Mannaggia, ci dispiace qualcosa non è andato come doveva, riprova')
 
 	    	
@@ -187,7 +188,8 @@ def AnalyticSuite()  :
 			    			
 			    			st.balloons()
 			    			
-	    		except:
+	    		except Exception as e:
+		    		print(e)
 		    		st.error('Mannaggia, ci dispiace qualcosa non è andato come doveva, riprova')
 	    			
 	    elif task == "Utilizza le Query SQL sui tuoi dati":
@@ -201,9 +203,11 @@ def AnalyticSuite()  :
 		    		st.markdown(get_binary_file_downloader_html('Dataset_query.csv', 'Riusltato qyery Sql IAITALIA'), unsafe_allow_html=True)
 		    		
 		    		st.balloons()
-		    	except:
+		    	except Exception as e:
+		    		print(e)
 		    		st.error('Mannaggia, ci dispiace qualcosa non è andato come doveva, riprova')
-	    
+				
+				
 	    elif task == "Crea PipeLine ADHOC in Python per i tuoi dati":
 	    	datasetPalgo = dataset
 	    	numerics = ['int16', 'int32', 'int64', 'float16', 'float32', 'float64']
@@ -271,7 +275,8 @@ def AnalyticSuite()  :
 				    		
 				    		st.balloons()
 			    
-	    		except:
+	    		except Exception as e:
+		    		print(e)
 		    		st.error('Mannaggia, ci dispiace qualcosa non è andato come doveva, riprova')
 		    	
 		    	
@@ -308,7 +313,8 @@ def AnalyticSuite()  :
 			    	    	st.markdown(get_binary_file_downloader_html('I_tuoi_dati_puliti_by_IAITALIA.csv', 'Dati puliti by IAITALIA'), unsafe_allow_html=True)
 			    	    	
 			    	    	st.balloons()
-	    		except:
+	    		except Exception as e:
+		    		print(e)
 		    		st.error('Mannaggia, ci dispiace qualcosa non è andato come doveva, riprova')
 		    	    	
 	    	if( col2.button("Normalizzami i valori Numerici [MINMAXSCALER] Gratuitamente")):
@@ -328,7 +334,8 @@ def AnalyticSuite()  :
 			    	    	st.markdown(get_binary_file_downloader_html('I_tuoi_dati_MINMAXSCALER_by_IAITALIA.csv', 'Dati normalizzati con metodo MINMAXSCALER by IAITALIA'), unsafe_allow_html=True)
 			    	    	
 			    	    	st.balloons()
-	    		except:
+	    		except Exception as e:
+		    		print(e)
 		    		st.error('Mannaggia, ci dispiace qualcosa non è andato come doveva, riprova')
 		    	    	
 		    	    	
@@ -349,9 +356,9 @@ def AnalyticSuite()  :
 			    	    	st.markdown(get_binary_file_downloader_html('I_tuoi_dati_STANDARSCALER_by_IAITALIA.csv', 'Dati normalizzati con metodo STANDARSCALER by IAITALIA'), unsafe_allow_html=True)
 			    	    	
 			    	    	st.balloons()
-	    		except:
+	    		except Exception as e:
+		    		print(e)
 		    		st.error('Mannaggia, ci dispiace qualcosa non è andato come doveva, riprova')
-
 
 
 
@@ -424,8 +431,9 @@ def ScrapeSuite():
 	    	
 		    	else:
 		    		st.error ("⚠️ - L'URL deve avere un formato valido, Devi iniziare con *https://* o *http://*")    
-    		except:
-	    		st.error('Mannaggia, ci dispiace qualcosa non è andato come doveva, riprova')
+    		except Exception as e:
+		    	print(e)
+		    	st.error('Mannaggia, ci dispiace qualcosa non è andato come doveva, riprova')
 	except ValueError:
 	    st.info ("ℹ️ - Non abbiamo trovato tabelle da Esportare ! 😊")
 
