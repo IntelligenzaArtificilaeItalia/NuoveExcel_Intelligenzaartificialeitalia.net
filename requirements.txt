@@ -1,5 +1,5 @@
 lazypredict
-requests==2.22.0
+requests
 pandas==1.2.0
 tabula_py==2.3.0
 pandasql==0.7.3
