@@ -1,5 +1,6 @@
 lazypredict
 requests
+streamlit-aggrid
 pandas
 tabula_py==2.3.0
 pandasql==0.7.3
