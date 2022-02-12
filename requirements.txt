@@ -14,5 +14,5 @@ numpy
 sklearn
 streamlit==1.1.0
 datacleaner==0.1.5
-scikit_learn==1.0.2
+scikit_learn
 
