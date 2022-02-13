@@ -168,27 +168,25 @@ def AnalyticSuite()  :
 	    			
 	    		if(tipo_di_problema == "CLASSIFICAZIONE"):
 
-				with st.spinner("Dacci un attimo, stiamo provando tutti gli algoritmi di Classificazione sui tuoi dati"):
-					clf = LazyClassifier(verbose=0,ignore_warnings=True, custom_metric=None)
-					models,predictions = clf.fit(X_train, X_test, y_train, y_test)
-					st.write(models)
-					models = pd.DataFrame(models)
-					models.to_csv("model.csv")
-					st.markdown(get_binary_file_downloader_html('model.csv', 'Rapporto Modelli Predittivi'), unsafe_allow_html=True)
-
-					st.balloons()
+	    			with st.spinner("Dacci un attimo, stiamo provando tutti gli algoritmi di Classificazione sui tuoi dati"):
+	    				clf = LazyClassifier(verbose=0,ignore_warnings=True, custom_metric=None)
+	    				models,predictions = clf.fit(X_train, X_test, y_train, y_test)
+	    				st.write(models)
+	    				models = pd.DataFrame(models)
+	    				models.to_csv("model.csv")
+	    				st.markdown(get_binary_file_downloader_html('model.csv', 'Rapporto Modelli Predittivi'), unsafe_allow_html=True)
+	    				st.balloons()
 
 	    		if(tipo_di_problema == "REGRESSIONE"):
 
-				with st.spinner("Dacci un attimo, stiamo provando tutti gli algoritmi di Regressione sui tuoi dati"):
-					reg = LazyRegressor(verbose=0, ignore_warnings=True, custom_metric=None)
-					models, predictions = reg.fit(X_train, X_test, y_train, y_test)
-					st.write(models)
-					models = pd.DataFrame(models)
-					models.to_csv("model.csv")
-					st.markdown(get_binary_file_downloader_html('model.csv', 'Rapporto Modelli Predittivi'), unsafe_allow_html=True)
-
-					st.balloons()
+	    			with st.spinner("Dacci un attimo, stiamo provando tutti gli algoritmi di Regressione sui tuoi dati"):
+	    				reg = LazyRegressor(verbose=0, ignore_warnings=True, custom_metric=None)
+	    				models, predictions = reg.fit(X_train, X_test, y_train, y_test)
+	    				st.write(models)
+	    				models = pd.DataFrame(models)
+	    				models.to_csv("model.csv")
+					st.markdown(get_binary_file_downloader_html('model.csv', 'Rapporto Modelli Predittivi'), unsafe_allow_html=True)		
+	    				st.balloons()
 			    			
 	    		#except Exception as e:
 		    		#print(e)
@@ -243,39 +241,35 @@ def AnalyticSuite()  :
 		    		
 	    		if tipo=="CLASSIFICAZIONE":
 
-				with st.spinner("Dacci qualche minuto, stiamo scrivendo il Codice in Python che implementa il miglior algoritmo sui tuoi dati e ottimizzandolo con gli iperparametri. Maggiore è il numero di Generazioni e Popolazione maggiore sarà il tempo di ATTESA..."):
-					pipeline_optimizer = TPOTClassifier()
-					pipeline_optimizer = TPOTClassifier(generations=gen, population_size=pop, scoring=sel_scor, cv=5,
+	    			with st.spinner("Dacci qualche minuto, stiamo scrivendo il Codice in Python che implementa il miglior algoritmo sui tuoi dati e ottimizzandolo con gli iperparametri. Maggiore è il numero di Generazioni e Popolazione maggiore sarà il tempo di ATTESA..."):
+	    				pipeline_optimizer = TPOTClassifier()
+	    				pipeline_optimizer = TPOTClassifier(generations=gen, population_size=pop, scoring=sel_scor, cv=5,
 							    random_state=42, verbosity=2)
-					pipeline_optimizer.fit(X_train, y_train)
-					st.write(f"Accuratezza PIPELINE : {pipeline_optimizer.score(X_test, y_test)*100} %")
-					pipeline_optimizer.export('IAITALIA_exported_pipeline.py')
-					filepipeline = open("IAITALIA_exported_pipeline.py", 'r', encoding='utf-8')
-					source_code = filepipeline.read() 
-					st.subheader("Miglior PipeLine Rilevata Sui tuoi Dati ")
-					my_text = st.text_area(label="Hai visto, Scriviamo anche il codice al posto tuo...", value=source_code, height=500)
-
-					st.markdown(get_binary_file_downloader_html('IAITALIA_exported_pipeline.py', 'pipeline.py IAITALIA'), unsafe_allow_html=True)
-
-					st.balloons()
+	    				pipeline_optimizer.fit(X_train, y_train)
+	    				st.write(f"Accuratezza PIPELINE : {pipeline_optimizer.score(X_test, y_test)*100} %")
+	    				pipeline_optimizer.export('IAITALIA_exported_pipeline.py')
+	    				filepipeline = open("IAITALIA_exported_pipeline.py", 'r', encoding='utf-8')
+	    				source_code = filepipeline.read() 
+	    				st.subheader("Miglior PipeLine Rilevata Sui tuoi Dati ")
+	    				my_text = st.text_area(label="Hai visto, Scriviamo anche il codice al posto tuo...", value=source_code, height=500)
+	    				st.markdown(get_binary_file_downloader_html('IAITALIA_exported_pipeline.py', 'pipeline.py IAITALIA'), unsafe_allow_html=True)
+	    				st.balloons()
 
 	    		if tipo=="REGRESSIONE":
 
-				with st.spinner(" Dacci qualche minuto, stiamo scrivendo il Codice in Python che implementa il miglior algoritmo sui tuoi dati e ottimizzandolo con gli iperparametri. Maggiore è il numero di Generazioni e Popolazione maggiore sarà il tempo di ATTESA..."):
-					pipeline_optimizer = TPOTRegressor()
-					pipeline_optimizer = TPOTRegressor(generations=gen, population_size=pop, scoring=sel_scor, cv=5,
+	    			with st.spinner(" Dacci qualche minuto, stiamo scrivendo il Codice in Python che implementa il miglior algoritmo sui tuoi dati e ottimizzandolo con gli iperparametri. Maggiore è il numero di Generazioni e Popolazione maggiore sarà il tempo di ATTESA..."):
+	    				pipeline_optimizer = TPOTRegressor()
+	    				pipeline_optimizer = TPOTRegressor(generations=gen, population_size=pop, scoring=sel_scor, cv=5,
 							    random_state=42, verbosity=2)
-					pipeline_optimizer.fit(X_train, y_train)
-					st.write(f"Accuratezza PIPELINE : {pipeline_optimizer.score(X_test, y_test)*100} %")
-					pipeline_optimizer.export('IAITALIA_exported_pipeline.py')
-					filepipeline = open("IAITALIA_exported_pipeline.py", 'r', encoding='utf-8')
-					source_code = filepipeline.read() 
-					st.subheader("Miglior PipeLine Rilevata Sui tuoi Dati ")
-					my_text = st.text_area(label="Hai visto, Scriviamo anche il codice al posto tuo...", value=source_code, height=500)
-
-					st.markdown(get_binary_file_downloader_html('IAITALIA_exported_pipeline.py', 'pipeline.py IAITALIA'), unsafe_allow_html=True)
-
-					st.balloons()
+	    				pipeline_optimizer.fit(X_train, y_train)
+	    				st.write(f"Accuratezza PIPELINE : {pipeline_optimizer.score(X_test, y_test)*100} %")
+	    				pipeline_optimizer.export('IAITALIA_exported_pipeline.py')
+	    				filepipeline = open("IAITALIA_exported_pipeline.py", 'r', encoding='utf-8')
+	    				source_code = filepipeline.read() 
+	    				st.subheader("Miglior PipeLine Rilevata Sui tuoi Dati ")
+	    				my_text = st.text_area(label="Hai visto, Scriviamo anche il codice al posto tuo...", value=source_code, height=500)
+	    				st.markdown(get_binary_file_downloader_html('IAITALIA_exported_pipeline.py', 'pipeline.py IAITALIA'), unsafe_allow_html=True)
+	    				st.balloons()
 			    
 	    		#except Exception as e:
 		    		#print(e)
