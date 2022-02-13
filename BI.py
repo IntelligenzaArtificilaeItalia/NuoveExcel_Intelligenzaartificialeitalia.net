@@ -445,7 +445,7 @@ def pdftocsv():
 			try :
 
 				#df = read_pdf(uploaded_file, pages='all')[0]
-				tables = tabula.read_pdf(uploaded_file, pages='all')
+				tables = read_pdf(uploaded_file, pages='all')
 				j=0
 				for tabelle in tables :
 					try:
