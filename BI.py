@@ -247,7 +247,7 @@ def AnalyticSuite()  :
 	    				pipeline_optimizer = TPOTClassifier(generations=gen, population_size=pop, scoring=sel_scor, cv=5,
 							    random_state=42, verbosity=2)
 	    				pipeline_optimizer.fit(X_train, y_train)
-	    				st.write(f"Accuratezza PIPELINE : {pipeline_optimizer.score(X_test, y_test)*100} %")
+	    				#st.write(f"Accuratezza PIPELINE : {pipeline_optimizer.score(X_test, y_test)*100} %")
 	    				pipeline_optimizer.export('IAITALIA_exported_pipeline.py')
 	    				filepipeline = open("IAITALIA_exported_pipeline.py", 'r', encoding='utf-8')
 	    				source_code = filepipeline.read() 
@@ -263,7 +263,7 @@ def AnalyticSuite()  :
 	    				pipeline_optimizer = TPOTRegressor(generations=gen, population_size=pop, scoring=sel_scor, cv=5,
 							    random_state=42, verbosity=2)
 	    				pipeline_optimizer.fit(X_train, y_train)
-	    				st.write(f"Accuratezza PIPELINE : {pipeline_optimizer.score(X_test, y_test)*100} %")
+	    				#st.write(f"Accuratezza PIPELINE : {pipeline_optimizer.score(X_test, y_test)*100} %")
 	    				pipeline_optimizer.export('IAITALIA_exported_pipeline.py')
 	    				filepipeline = open("IAITALIA_exported_pipeline.py", 'r', encoding='utf-8')
 	    				source_code = filepipeline.read() 
