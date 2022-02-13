@@ -1,4 +1,4 @@
-lazypredict==0.2.9
+lazypredict
 requests
 streamlit-aggrid
 pandas
