@@ -6,7 +6,7 @@ tabula-py
 pandasql==0.7.3
 sweetviz==2.1.3
 streamlit_pandas_profiling==0.1.2
-TPOT==0.11.7
+TPOT
 html5lib==1.1
 pandas_profiling
 numpy
