@@ -166,7 +166,7 @@ def AnalyticSuite()  :
 	    	if(st.button("Svelami il Miglior Algoritmo per i miei dati Gratuitamente")):
 	    		#try :
 	    			
-			if(tipo_di_problema == "CLASSIFICAZIONE"):
+	    		if(tipo_di_problema == "CLASSIFICAZIONE"):
 
 				with st.spinner("Dacci un attimo, stiamo provando tutti gli algoritmi di Classificazione sui tuoi dati"):
 					clf = LazyClassifier(verbose=0,ignore_warnings=True, custom_metric=None)
@@ -178,7 +178,7 @@ def AnalyticSuite()  :
 
 					st.balloons()
 
-			if(tipo_di_problema == "REGRESSIONE"):
+	    		if(tipo_di_problema == "REGRESSIONE"):
 
 				with st.spinner("Dacci un attimo, stiamo provando tutti gli algoritmi di Regressione sui tuoi dati"):
 					reg = LazyRegressor(verbose=0, ignore_warnings=True, custom_metric=None)
@@ -241,7 +241,7 @@ def AnalyticSuite()  :
 	    	if(st.button("Creami la miglior pipeline in Python Gratuitamente")):
 	    		#try :
 		    		
-			if tipo=="CLASSIFICAZIONE":
+	    		if tipo=="CLASSIFICAZIONE":
 
 				with st.spinner("Dacci qualche minuto, stiamo scrivendo il Codice in Python che implementa il miglior algoritmo sui tuoi dati e ottimizzandolo con gli iperparametri. Maggiore è il numero di Generazioni e Popolazione maggiore sarà il tempo di ATTESA..."):
 					pipeline_optimizer = TPOTClassifier()
@@ -259,7 +259,7 @@ def AnalyticSuite()  :
 
 					st.balloons()
 
-			if tipo=="REGRESSIONE":
+	    		if tipo=="REGRESSIONE":
 
 				with st.spinner(" Dacci qualche minuto, stiamo scrivendo il Codice in Python che implementa il miglior algoritmo sui tuoi dati e ottimizzandolo con gli iperparametri. Maggiore è il numero di Generazioni e Popolazione maggiore sarà il tempo di ATTESA..."):
 					pipeline_optimizer = TPOTRegressor()
