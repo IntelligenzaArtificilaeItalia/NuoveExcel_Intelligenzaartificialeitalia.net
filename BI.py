@@ -66,13 +66,13 @@ def get_binary_file_downloader_html(bin_file, file_label='File'):
     
 def app(dataset):
     # Use the analysis function from sweetviz module to create a 'DataframeReport' object.
-    analysis = sv.analyze([dataset,'EDA2'], feat_cfg=sv.FeatureConfig(force_text=[]), target_feat=None)
-    analysis.show_html(filepath='EDA2.html', open_browser=False, layout='vertical', scale=1.0)
-    HtmlFile = open("EDA2.html", 'r', encoding='utf-8')
+    analysis = sv.analyze([dataset,'AnalisiEDA2_powered_by_IAI'], feat_cfg=sv.FeatureConfig(force_text=[]), target_feat=None)
+    analysis.show_html(filepath='AnalisiEDA2_powered_by_IAI.html', open_browser=False, layout='vertical', scale=1.0)
+    HtmlFile = open("AnalisiEDA2_powered_by_IAI.html", 'r', encoding='utf-8')
     source_code = HtmlFile.read() 
     components.html(source_code,height=1200, scrolling=True)
-    st.markdown(get_binary_file_downloader_html('EDA2.html', 'Report'), unsafe_allow_html=True)
-    st.success("Primo Report Generato Con Successo, per scaricarlo clicca il Link quì sopra.")
+    st.markdown(get_binary_file_downloader_html('AnalisiEDA2_powered_by_IAI.html', 'Report'), unsafe_allow_html=True)
+    st.success("Secondo Report Generato Con Successo, per scaricarlo clicca il Link quì sopra.")
 
 def displayPDF(file):
     # Opening file from file path
@@ -109,14 +109,14 @@ def AnalyticSuite()  :
 	    gridOptions = gb.build()
 	    
 	    try:
-	    	with st.expander("VISUALIZZA DATASET"):
+	    	with st.expander("VISUALIZZA e MODIFICA il DATASET"):
 	    		grid_response = AgGrid(
 			    dataset, 
 			    gridOptions=gridOptions,
 			    update_mode="MODEL_CHANGED",
 			    )
 		
-	    	with st.expander("STATISICA DI BASE"):
+	    	with st.expander("VISUALIZZA delle STATISICHE di BASE"):
 	    		st.write(dataset.describe())
 	    except:
 		    print("")
@@ -131,8 +131,8 @@ def AnalyticSuite()  :
 	    		try :
 			    	pr = ProfileReport(dataset, explorative=True, orange_mode=False)
 			    	st_profile_report(pr)
-			    	pr.to_file("EDA.html")
-			    	st.markdown(get_binary_file_downloader_html('EDA.html', 'Report'), unsafe_allow_html=True)
+			    	pr.to_file("AnalisiEDA_powered_by_IAI.html")
+			    	st.markdown(get_binary_file_downloader_html('AnalisiEDA_powered_by_IAI.html', 'Report'), unsafe_allow_html=True)
 			    	st.success("Primo Report Generato Con Successo, per scaricarlo clicca il Link quì sopra.")
 			    	app(dataset)
 			    	
@@ -169,13 +169,13 @@ def AnalyticSuite()  :
 	    			
 	    		if(tipo_di_problema == "CLASSIFICAZIONE"):
 
-	    			with st.spinner("Dacci un attimo, stiamo provando tutti gli algoritmi di Classificazione sui tuoi dati"):
+	    			with st.spinner("Dacci qualche minuto, stiamo provando tutti gli algoritmi di Classificazione sui tuoi dati"):
 	    				clf = LazyClassifier(verbose=0,ignore_warnings=True, custom_metric=None)
 	    				models,predictions = clf.fit(X_train, X_test, y_train, y_test)
 	    				st.write(models)
 	    				models = pd.DataFrame(models)
-	    				models.to_csv("model.csv")
-	    				st.markdown(get_binary_file_downloader_html('model.csv', 'Rapporto Modelli Predittivi'), unsafe_allow_html=True)
+	    				models.to_csv("MigliorAlgoritmo_powered_by_IAI.csv")
+	    				st.markdown(get_binary_file_downloader_html('MigliorAlgoritmo_powered_by_IAI.csv', 'Rapporto Modelli Predittivi'), unsafe_allow_html=True)
 	    				st.balloons()
 
 	    		if(tipo_di_problema == "REGRESSIONE"):
@@ -185,8 +185,8 @@ def AnalyticSuite()  :
 	    				models, predictions = reg.fit(X_train, X_test, y_train, y_test)
 	    				st.write(models)
 	    				models = pd.DataFrame(models)
-	    				models.to_csv("model.csv")
-	    				st.markdown(get_binary_file_downloader_html('model.csv', 'Rapporto Modelli Predittivi'), unsafe_allow_html=True)		
+	    				models.to_csv("MigliorAlgoritmo_powered_by_IAI.csv")
+	    				st.markdown(get_binary_file_downloader_html('MigliorAlgoritmo_powered_by_IAI.csv', 'Rapporto Modelli Predittivi'), unsafe_allow_html=True)		
 	    				st.balloons()
 			    			
 	    		#except Exception as e:
@@ -200,9 +200,8 @@ def AnalyticSuite()  :
 		    		df = sqldf(q)
 		    		df = pd.DataFrame(df)
 		    		st.write(df)
-		    		df.to_csv("Dataset_query.csv")
-		    		st.markdown(get_binary_file_downloader_html('Dataset_query.csv', 'Riusltato qyery Sql IAITALIA'), unsafe_allow_html=True)
-		    		
+		    		df.to_csv("RisultatiQuery_powered_by_IAI.csv")
+		    		st.markdown(get_binary_file_downloader_html('RisultatiQuery_powered_by_IAI.csv', 'Riusltato Query Sql sui tuoi dati'), unsafe_allow_html=True)
 		    		st.balloons()
 		    	except Exception as e:
 		    		print(e)
@@ -248,12 +247,12 @@ def AnalyticSuite()  :
 							    random_state=42, verbosity=2)
 	    				pipeline_optimizer.fit(X_train, y_train)
 	    				#st.write(f"Accuratezza PIPELINE : {pipeline_optimizer.score(X_test, y_test)*100} %")
-	    				pipeline_optimizer.export('IAITALIA_exported_pipeline.py')
-	    				filepipeline = open("IAITALIA_exported_pipeline.py", 'r', encoding='utf-8')
+	    				pipeline_optimizer.export('PipelinePython_powered_by_IAI.py')
+	    				filepipeline = open("PipelinePython_powered_by_IAI.py", 'r', encoding='utf-8')
 	    				source_code = filepipeline.read() 
 	    				st.subheader("Miglior PipeLine Rilevata Sui tuoi Dati ")
 	    				my_text = st.text_area(label="Hai visto, Scriviamo anche il codice al posto tuo...", value=source_code, height=500)
-	    				st.markdown(get_binary_file_downloader_html('IAITALIA_exported_pipeline.py', 'pipeline.py IAITALIA'), unsafe_allow_html=True)
+	    				st.markdown(get_binary_file_downloader_html('PipelinePython_powered_by_IAI.py', 'Scarica il file python pronto per essere eseguito'), unsafe_allow_html=True)
 	    				st.balloons()
 
 	    		if tipo=="REGRESSIONE":
@@ -264,12 +263,12 @@ def AnalyticSuite()  :
 							    random_state=42, verbosity=2)
 	    				pipeline_optimizer.fit(X_train, y_train)
 	    				#st.write(f"Accuratezza PIPELINE : {pipeline_optimizer.score(X_test, y_test)*100} %")
-	    				pipeline_optimizer.export('IAITALIA_exported_pipeline.py')
-	    				filepipeline = open("IAITALIA_exported_pipeline.py", 'r', encoding='utf-8')
+	    				pipeline_optimizer.export('PipelinePython_powered_by_IAI.py')
+	    				filepipeline = open("PipelinePython_powered_by_IAI.py", 'r', encoding='utf-8')
 	    				source_code = filepipeline.read() 
 	    				st.subheader("Miglior PipeLine Rilevata Sui tuoi Dati ")
 	    				my_text = st.text_area(label="Hai visto, Scriviamo anche il codice al posto tuo...", value=source_code, height=500)
-	    				st.markdown(get_binary_file_downloader_html('IAITALIA_exported_pipeline.py', 'pipeline.py IAITALIA'), unsafe_allow_html=True)
+	    				st.markdown(get_binary_file_downloader_html('PipelinePython_powered_by_IAI.py', 'Scarica il file python pronto per essere eseguito'), unsafe_allow_html=True)
 	    				st.balloons()
 			    
 	    		#except Exception as e:
@@ -285,9 +284,9 @@ def AnalyticSuite()  :
 	    	buffer = io.StringIO() 
 	    	dataset.info(buf=buffer)
 	    	s = buffer.getvalue() 
-	    	with open("df_info.txt", "w", encoding="utf-8") as f:
+	    	with open("InformaziniDataset_powered_by_IAI.txt", "w", encoding="utf-8") as f:
 	    	     f.write(s) 
-	    	fileinfo = open("df_info.txt", 'r', encoding='utf-8')
+	    	fileinfo = open("InformaziniDataset_powered_by_IAI.txt", 'r', encoding='utf-8')
 	    	source_code = fileinfo.read() 
 	    	st.text_area(label="info...", value=source_code, height=300)
 	    	
@@ -301,14 +300,13 @@ def AnalyticSuite()  :
 			    	    	buffer = io.StringIO() 
 			    	    	dataset.info(buf=buffer)
 			    	    	s = buffer.getvalue() 
-			    	    	with open("df_info.txt", "w", encoding="utf-8") as f:
+			    	    	with open("InformaziniDataset_powered_by_IAI.txt", "w", encoding="utf-8") as f:
 			    	    	     f.write(s) 
-			    	    	fileinfo = open("df_info.txt", 'r', encoding='utf-8')
+			    	    	fileinfo = open("InformaziniDataset_powered_by_IAI.txt", 'r', encoding='utf-8')
 			    	    	source_code = fileinfo.read() 
 			    	    	st.text_area(label="info dati puliti...", value=source_code, height=300)
-			    	    	dataset_pulito.to_csv('I_tuoi_dati_puliti_by_IAITALIA.csv', sep=',', index=False)
-			    	    	st.markdown(get_binary_file_downloader_html('I_tuoi_dati_puliti_by_IAITALIA.csv', 'Dati puliti by IAITALIA'), unsafe_allow_html=True)
-			    	    	
+			    	    	dataset_pulito.to_csv('DatasetPulito_powered_by_IAI.csv', sep=',', index=False)
+			    	    	st.markdown(get_binary_file_downloader_html('DatasetPulito_powered_by_IAI.csv', 'Scarica i tuoi Dati puliti'), unsafe_allow_html=True)
 			    	    	st.balloons()
 	    		except Exception as e:
 		    		print(e)
@@ -327,8 +325,8 @@ def AnalyticSuite()  :
 			    	    	colonneMM = datasetMM.columns
 			    	    	scaled = pd.DataFrame(scaled, columns = colonneMM)
 			    	    	st.write(scaled)
-			    	    	scaled.to_csv('I_tuoi_dati_MINMAXSCALER_by_IAITALIA.csv', sep=',', index=False)
-			    	    	st.markdown(get_binary_file_downloader_html('I_tuoi_dati_MINMAXSCALER_by_IAITALIA.csv', 'Dati normalizzati con metodo MINMAXSCALER by IAITALIA'), unsafe_allow_html=True)
+			    	    	scaled.to_csv('DatasetMINMAXSCALER_powered_by_IAI.csv', sep=',', index=False)
+			    	    	st.markdown(get_binary_file_downloader_html('DatasetMINMAXSCALER_powered_by_IAI.csv', 'Dati normalizzati con metodo MINMAXSCALER by IAITALIA'), unsafe_allow_html=True)
 			    	    	
 			    	    	st.balloons()
 	    		except Exception as e:
@@ -343,14 +341,14 @@ def AnalyticSuite()  :
 			    	    	numerics = ['int16', 'int32', 'int64', 'float16', 'float32', 'float64']
 			    	    	datasetSS = datasetSS.select_dtypes(include=numerics)
 			    	    	datasetSS = datasetSS.dropna()
-			    	    	from sklearn.preprocessing import MinMaxScaler
-			    	    	scaler = MinMaxScaler()
+			    	    	from sklearn.preprocessing import StandardScaler
+			    	    	scaler = StandardScaler()
 			    	    	scaled = scaler.fit_transform(datasetSS)
 			    	    	colonneSS = datasetSS.columns
 			    	    	scaled = pd.DataFrame(scaled, columns = colonneSS)
 			    	    	st.write(scaled)
-			    	    	scaled.to_csv('I_tuoi_dati_STANDARSCALER_by_IAITALIA.csv', sep=',', index=False)
-			    	    	st.markdown(get_binary_file_downloader_html('I_tuoi_dati_STANDARSCALER_by_IAITALIA.csv', 'Dati normalizzati con metodo STANDARSCALER by IAITALIA'), unsafe_allow_html=True)
+			    	    	scaled.to_csv('DatasetSTANDARDSCALER_powered_by_IAI.csv', sep=',', index=False)
+			    	    	st.markdown(get_binary_file_downloader_html('DatasetSTANDARDSCALER_powered_by_IAI.csv', 'Dati normalizzati con metodo STANDARSCALER by IAITALIA'), unsafe_allow_html=True)
 			    	    	
 			    	    	st.balloons()
 	    		except Exception as e:
@@ -473,10 +471,10 @@ def pdftocsv():
 #################MAIN
 
 def main():
-	Menu = st.selectbox("Menu", ["Analizza i Tuoi File CSV o Excel - Analytic Suite", "Scarica Tabelle da Pagine web - WebScrape Siute", "Trasforma i tuoi pdf in file csv da analizzare"])
+	Menu = st.selectbox("Menu", ["Analizza i Tuoi File CSV - Analytic Suite", "Scarica Tabelle da Pagine web - WebScrape Siute", "Trasforma i tuoi pdf in file csv da analizzare"])
 
 
-	if Menu == "Analizza i Tuoi File CSV o Excel - Analytic Suite" :
+	if Menu == "Analizza i Tuoi File CSV - Analytic Suite" :
 		AnalyticSuite()
 	if Menu == "Scarica Tabelle da Pagine web - WebScrape Siute" :
 		ScrapeSuite()
