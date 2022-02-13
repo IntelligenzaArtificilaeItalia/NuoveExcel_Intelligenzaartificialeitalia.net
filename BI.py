@@ -17,6 +17,7 @@ import requests
 import time
 import codecs
 import os
+from sklearn.utils._testing import ignore_warnings
 from st_aggrid import AgGrid, DataReturnMode, GridUpdateMode, GridOptionsBuilder
 from lazypredict.Supervised import LazyClassifier
 from lazypredict.Supervised import LazyRegressor
