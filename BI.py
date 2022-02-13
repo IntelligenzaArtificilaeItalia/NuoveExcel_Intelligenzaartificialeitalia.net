@@ -185,7 +185,7 @@ def AnalyticSuite()  :
 	    				st.write(models)
 	    				models = pd.DataFrame(models)
 	    				models.to_csv("model.csv")
-					st.markdown(get_binary_file_downloader_html('model.csv', 'Rapporto Modelli Predittivi'), unsafe_allow_html=True)		
+	    				st.markdown(get_binary_file_downloader_html('model.csv', 'Rapporto Modelli Predittivi'), unsafe_allow_html=True)		
 	    				st.balloons()
 			    			
 	    		#except Exception as e:
