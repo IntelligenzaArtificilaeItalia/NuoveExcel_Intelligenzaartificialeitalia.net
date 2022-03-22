@@ -17,7 +17,8 @@ import requests
 import time
 import codecs
 import os
-import io
+from io import BytesIO
+from pyxlsb import open_workbook as open_xlsb
 from sklearn.utils._testing import ignore_warnings
 from st_aggrid import AgGrid, DataReturnMode, GridUpdateMode, GridOptionsBuilder, JsCode
 from lazypredict.Supervised import LazyClassifier
@@ -522,7 +523,21 @@ def NuovoExcel():
 				    enable_enterprise_modules=True
 				)
 
+def to_excel(df):
+    output = BytesIO()
+    writer = pd.ExcelWriter(output, engine='xlsxwriter')
+    df.to_excel(writer, index=False, sheet_name='Sheet1')
+    workbook = writer.book
+    worksheet = writer.sheets['Sheet1']
+    format1 = workbook.add_format({'num_format': '0.00'}) 
+    worksheet.set_column('A:A', None, format1)  
+    writer.save()
+    processed_data = output.getvalue()
+    return processed_data
 
+@st.cache
+def convert_df(df):
+   return df.to_csv().encode('utf-8')
 
 def convertiExcel():
 
@@ -532,25 +547,25 @@ def convertiExcel():
 
 		if uploaded_file_2 is not None:
 			df = pd.read_excel(uploaded_file_2)
-			towrite = io.BytesIO()
-			downloaded_file = df.to_csv (towrite, index = None, header=True)
-			towrite.seek(0)  # reset pointer
-			b64 = base64.b64encode(towrite.read()).decode()  # some strings
-			linko= f'<a href="data:application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;base64,{b64}" download="DatasetConvertito.csv">Scarica il Datset Convertito in .csv</a>'
-			st.markdown(linko, unsafe_allow_html=True)
+			csv = convert_df(df)
+			st.download_button(
+			   "📥 Scarica il Datset Convertito in .csv",
+			   csv,
+			   "DatasetConvertito.csv",
+			   "text/csv",
+			   key='download-csv'
+			)
 
 	if( operazione1 == "Da .csv a .xls"):
 		uploaded_file_2 = st.file_uploader("Perfavore inserisci quì il file di tipo .csv ", type=["csv"])
 
 		if uploaded_file_2 is not None:
 			df = pd.read_csv(uploaded_file_2)
-			towrite = io.BytesIO()
-			downloaded_file = df.to_excel (towrite, encoding='utf-8', index = None, header=True)
-			towrite.seek(0)  # reset pointer
-			b64 = base64.b64encode(towrite.read()).decode()  # some strings
-			linko= f'<a href="data:application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;base64,{b64}" download="DatasetConvertito.xls">Scarica il Datset Convertito in .xlx</a>'
-			st.markdown(linko, unsafe_allow_html=True)
-
+			df_xlsx = to_excel(df)
+			st.download_button(label='📥 Scarica il Datset Convertito in .xlx',
+						        data=df_xlsx ,
+						        file_name= 'DatasetConvertito.xlsx')
+			
 
 #################MAIN
 
