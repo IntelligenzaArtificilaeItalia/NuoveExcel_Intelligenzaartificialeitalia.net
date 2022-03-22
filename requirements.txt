@@ -19,3 +19,4 @@ streamlit-option-menu
 xlrd
 pyxlsb
 openpyxl
+xlsxwriter
