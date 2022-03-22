@@ -533,7 +533,7 @@ def convertiExcel():
 		if uploaded_file_2 is not None:
 			df = pd.read_excel(uploaded_file_2)
 			towrite = io.BytesIO()
-			downloaded_file = df.to_csv (towrite, encoding='utf-8', index = None, header=True)
+			downloaded_file = df.to_csv (towrite, index = None, header=True)
 			towrite.seek(0)  # reset pointer
 			b64 = base64.b64encode(towrite.read()).decode()  # some strings
 			linko= f'<a href="data:application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;base64,{b64}" download="DatasetConvertito.csv">Scarica il Datset Convertito in .csv</a>'
