@@ -512,7 +512,7 @@ def NuovoExcel():
 			gb.configure_grid_options(enableRangeSelection=True)
 
 			response = AgGrid(
-			    df,
+			    dataset,
 			    height=800, 
 			    width='100%',
 			    gridOptions=gb.build(),
