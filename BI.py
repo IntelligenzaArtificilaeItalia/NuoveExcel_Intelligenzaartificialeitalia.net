@@ -23,12 +23,16 @@ from lazypredict.Supervised import LazyClassifier
 from lazypredict.Supervised import LazyRegressor
 from tpot import TPOTClassifier
 from tpot import TPOTRegressor
+from streamlit_option_menu import option_menu
+import streamlit.components.v1 as html
 
 timestr = time.strftime("%Y%m%d-%H%M%S")
 st.set_page_config(page_title="Suite Analisi Dati", page_icon="🔍", layout='wide', initial_sidebar_state='auto')
 
 st.markdown("<center><h1> Italian Intelligence Analytic Suite <small><br> Powered by INTELLIGENZAARTIFICIALEITALIA.NET </small></h1>", unsafe_allow_html=True)
-st.write('<p style="text-align: center;font-size:15px;" > <bold>Tutti i tool di Analisi, Pulizia e Visualizzazione Dati in unico Posto <bold>  </bold><p>', unsafe_allow_html=True)
+st.write('<p style="text-align: center;font-size:15px;" > <bold>Tutti i tool di Analisi, Pulizia e Visualizzazione Dati in unico Posto <bold>  </bold><p><br>', unsafe_allow_html=True)
+
+
 
 hide_st_style = """
             <style>
@@ -471,8 +475,18 @@ def pdftocsv():
 #################MAIN
 
 def main():
-	Menu = st.selectbox("Menu", ["Analizza i Tuoi File CSV - Analytic Suite", "Scarica Tabelle da Pagine web - WebScrape Siute", "Trasforma i tuoi pdf in file csv da analizzare"])
 
+	
+	Menu = option_menu("La miglior Suite DataScience 🐍🔥", ["Analizza i Tuoi File CSV - Analytic Suite", "Scarica Tabelle da Pagine web - WebScrape Siute", "Trasforma i tuoi pdf in file csv da analizzare", "Usa la nostra versione di Excel"],
+				 icons=['clipboard2-data-fill', 'globe', 'filetype-pdf', 'file-earmark-spreadsheet'],
+				 menu_icon="app-indicator", default_index=0,orientation='horizontal',
+				 styles={
+"container": {"padding": "5!important", "background-color": "#fafafa", "width": "100%"},
+"icon": {"color": "blue", "font-size": "15px"}, 
+"nav-link": {"font-size": "16px", "text-align": "left", "margin":"0px", "--hover-color": "#eee"},
+"nav-link-selected": {"background-color": "#02ab21"},
+}
+)
 
 	if Menu == "Analizza i Tuoi File CSV - Analytic Suite" :
 		AnalyticSuite()
