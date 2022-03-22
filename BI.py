@@ -477,8 +477,8 @@ def pdftocsv():
 def NuovoExcel():
 	df = pd.DataFrame(
 	    "",
-	    index=range(10000),
-	    columns=list("abcdefghilmnopqrstuvz"),
+	    index=range(100000),
+	    columns=list("abcdefghilm"),
 	)
 
 	gb = GridOptionsBuilder.from_dataframe(df)
@@ -488,6 +488,8 @@ def NuovoExcel():
 
 	response = AgGrid(
 	    df,
+	    height=800, 
+	    width='100%',
 	    gridOptions=gb.build(),
 	    fit_columns_on_grid_load=True,
 	    allow_unsafe_jscode=True,
