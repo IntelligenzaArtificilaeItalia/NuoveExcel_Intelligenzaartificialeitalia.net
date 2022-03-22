@@ -17,4 +17,5 @@ scikit-learn
 lazypredict==0.2.9
 streamlit-option-menu
 xlrd
+pyxlsb
 openpyxl
