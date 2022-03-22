@@ -492,7 +492,7 @@ def NuovoExcel():
 	    fit_columns_on_grid_load=True,
 	    allow_unsafe_jscode=True,
 	    enable_enterprise_modules=True
-	)```
+	)
 
 
 #################MAIN
