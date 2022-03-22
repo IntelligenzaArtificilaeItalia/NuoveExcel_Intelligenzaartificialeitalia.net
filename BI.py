@@ -477,7 +477,7 @@ def pdftocsv():
 def NuovoExcel():
 	df = pd.DataFrame(
 	    "",
-	    index=range(1000000),
+	    index=range(10000),
 	    columns=list("abcdefghilmnopqrstuvz"),
 	)
 
