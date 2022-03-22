@@ -475,28 +475,53 @@ def pdftocsv():
 
 
 def NuovoExcel():
-	df = pd.DataFrame(
-	    "",
-	    index=range(100000),
-	    columns=list("abcdefghilm"),
-	)
 
-	gb = GridOptionsBuilder.from_dataframe(df)
-	gb.configure_default_column(editable=True)
+	operazione = st.selectbox("Cosa ti serve ?", ["Un foglo vuoto", "Partire dal mio set di dati"])
+	if( operazione == "Un foglo vuoto"):
+		df = pd.DataFrame(
+		    "",
+		    index=range(100000),
+		    columns=list("abcdefghilmnopq"),
+		)
 
-	gb.configure_grid_options(enableRangeSelection=True)
+		gb = GridOptionsBuilder.from_dataframe(df)
+		gb.configure_default_column(editable=True)
 
-	response = AgGrid(
-	    df,
-	    height=800, 
-	    width='100%',
-	    gridOptions=gb.build(),
-	    fit_columns_on_grid_load=True,
-	    allow_unsafe_jscode=True,
-	    enable_enterprise_modules=True
-	)
+		gb.configure_grid_options(enableRangeSelection=True)
 
+		response = AgGrid(
+		    df,
+		    height=800, 
+		    width='100%',
+		    gridOptions=gb.build(),
+		    fit_columns_on_grid_load=True,
+		    allow_unsafe_jscode=True,
+		    enable_enterprise_modules=True
+		)
+	if( operazione == "Partire dal mio set di dati"):
+		uploaded_file_2 = st.file_uploader("Perfavore inserisci quì il file di tipo csv, usando come separatore la virgola!", type=["csv"])
 
+		if uploaded_file_2 is not None:
+			dataset = pd.read_csv(uploaded_file_2)
+			colonne = list(dataset.columns)
+			options = st.multiselect("Seleziona le colonne che vuoi usare..",colonne,colonne)
+			dataset = dataset[options]
+			gb = GridOptionsBuilder.from_dataframe(dataset)
+			gb.configure_default_column(editable=True)
+
+			gb.configure_grid_options(enableRangeSelection=True)
+
+			response = AgGrid(
+			    df,
+			    height=800, 
+			    width='100%',
+			    gridOptions=gb.build(),
+			    fit_columns_on_grid_load=True,
+			    allow_unsafe_jscode=True,
+			    enable_enterprise_modules=True
+			)
+
+  
 #################MAIN
 
 def main():
