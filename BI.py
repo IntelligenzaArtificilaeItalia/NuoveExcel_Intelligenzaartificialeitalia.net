@@ -18,7 +18,7 @@ import time
 import codecs
 import os
 from sklearn.utils._testing import ignore_warnings
-from st_aggrid import AgGrid, DataReturnMode, GridUpdateMode, GridOptionsBuilder
+from st_aggrid import AgGrid, DataReturnMode, GridUpdateMode, GridOptionsBuilder, JsCode
 from lazypredict.Supervised import LazyClassifier
 from lazypredict.Supervised import LazyRegressor
 from tpot import TPOTClassifier
@@ -472,12 +472,35 @@ def pdftocsv():
 			except ValueError:
 				st.info ("ℹ️ - Non abbiamo trovato tabelle da Esportare ! 😊")
 
+
+
+def NuovoExcel():
+	df = pd.DataFrame(
+	    "",
+	    index=range(1000000),
+	    columns=list("abcdefghilmnopqrstuvz"),
+	)
+
+	gb = GridOptionsBuilder.from_dataframe(df)
+	gb.configure_default_column(editable=True)
+
+	gb.configure_grid_options(enableRangeSelection=True)
+
+	response = AgGrid(
+	    df,
+	    gridOptions=gb.build(),
+	    fit_columns_on_grid_load=True,
+	    allow_unsafe_jscode=True,
+	    enable_enterprise_modules=True
+	)```
+
+
 #################MAIN
 
 def main():
 
 	
-	Menu = option_menu("La miglior Suite DataScience 🐍🔥", ["Analizza i Tuoi File CSV - Analytic Suite", "Scarica Tabelle da Pagine web - WebScrape Siute", "Trasforma i tuoi pdf in file csv da analizzare", "Usa la nostra versione di Excel"],
+	Menu = option_menu("La miglior Suite DataScience 🐍🔥", ["Analytic Suite", "WebScrape Siute", "Da pdf a Csv", "Excel Online"],
 				 icons=['clipboard-data', 'globe', 'file-pdf', 'file-earmark-spreadsheet'],
 				 menu_icon="app-indicator", default_index=0,orientation='horizontal',
 				 styles={
@@ -488,12 +511,14 @@ def main():
 }
 )
 
-	if Menu == "Analizza i Tuoi File CSV - Analytic Suite" :
+	if Menu == "Analytic Suite" :
 		AnalyticSuite()
-	if Menu == "Scarica Tabelle da Pagine web - WebScrape Siute" :
+	if Menu == "WebScrape Siute" :
 		ScrapeSuite()
-	if Menu == "Trasforma i tuoi pdf in file csv da analizzare" :
+	if Menu == "Da pdf a Csv" :
 		pdftocsv()
+	if Menu == "Excel Online" :
+		NuovoExcel()
 
 
 	
