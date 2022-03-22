@@ -17,6 +17,7 @@ import requests
 import time
 import codecs
 import os
+import io
 from sklearn.utils._testing import ignore_warnings
 from st_aggrid import AgGrid, DataReturnMode, GridUpdateMode, GridOptionsBuilder, JsCode
 from lazypredict.Supervised import LazyClassifier
@@ -525,9 +526,9 @@ def NuovoExcel():
 
 def convertiExcel():
 
-	operazione1 = st.selectbox("Cosa ti serve ?", ["Da .xlsx a .csv", "Da .csv a .xlsx"])
-	if( operazione1 == "Da .xlsx a .csv"):
-		uploaded_file_2 = st.file_uploader("Perfavore inserisci quì il file di tipo .xlsx ", type=["xlsx"])
+	operazione1 = st.selectbox("Cosa ti serve ?", ["Da .xls a .csv", "Da .csv a .xls"])
+	if( operazione1 == "Da .xls a .csv"):
+		uploaded_file_2 = st.file_uploader("Perfavore inserisci quì il file di tipo .xls ", type=["xls"])
 
 		if uploaded_file_2 is not None:
 			df = pd.read_excel(uploaded_file_2)
@@ -538,7 +539,7 @@ def convertiExcel():
 			linko= f'<a href="data:application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;base64,{b64}" download="DatasetConvertito.csv">Scarica il Datset Convertito in .csv</a>'
 			st.markdown(linko, unsafe_allow_html=True)
 
-	if( operazione1 == "Da .csv a .xlsx"):
+	if( operazione1 == "Da .csv a .xls"):
 		uploaded_file_2 = st.file_uploader("Perfavore inserisci quì il file di tipo .csv ", type=["csv"])
 
 		if uploaded_file_2 is not None:
@@ -547,7 +548,7 @@ def convertiExcel():
 			downloaded_file = df.to_excel (towrite, encoding='utf-8', index = None, header=True)
 			towrite.seek(0)  # reset pointer
 			b64 = base64.b64encode(towrite.read()).decode()  # some strings
-			linko= f'<a href="data:application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;base64,{b64}" download="DatasetConvertito.xlsx">Scarica il Datset Convertito in .xlsx</a>'
+			linko= f'<a href="data:application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;base64,{b64}" download="DatasetConvertito.xls">Scarica il Datset Convertito in .xlx</a>'
 			st.markdown(linko, unsafe_allow_html=True)
 
 
