@@ -92,13 +92,13 @@ def AnalyticSuite()  :
 
 	uploaded_file = st.file_uploader("Perfavore inserisci quì il file di tipo csv, usando come separatore la virgola!", type=["csv"])
 
-	st.sidebar.subheader("") 
-	st.sidebar.subheader("") 
-	st.sidebar.subheader("Notepad")
-	my_text = st.sidebar.text_area(label="Inserisci quì le tue osservazioni o note!", value="Al momento non hai nesuna nota...", height=30)
+	#st.sidebar.subheader("") 
+	#st.sidebar.subheader("") 
+	#st.sidebar.subheader("Notepad")
+	#my_text = st.sidebar.text_area(label="Inserisci quì le tue osservazioni o note!", value="Al momento non hai nesuna nota...", height=30)
 
-	if st.sidebar.button("Salva"):
-		text_downloader(my_text)
+	#if st.sidebar.button("Salva"):
+	#	text_downloader(my_text)
 		
 	if uploaded_file is not None:
 	    dataset = pd.read_csv(uploaded_file)
@@ -364,13 +364,13 @@ def AnalyticSuite()  :
 ###########################WEBSCRAPESUITE
 def ScrapeSuite():
 
-	st.sidebar.subheader("") 
-	st.sidebar.subheader("") 
-	st.sidebar.subheader("Notepad")
-	my_text = st.sidebar.text_area(label="Inserisci quì le tue osservazioni o note!", value="Al momento non hai nesuna nota...", height=30)
+	#st.sidebar.subheader("") 
+	#st.sidebar.subheader("") 
+	#st.sidebar.subheader("Notepad")
+	#my_text = st.sidebar.text_area(label="Inserisci quì le tue osservazioni o note!", value="Al momento non hai nesuna nota...", height=30)
 
-	if st.sidebar.button("Salva"):
-		text_downloader(my_text)
+	#if st.sidebar.button("Salva"):
+	#	text_downloader(my_text)
 		
 	st.subheader("") 
 	st.markdown("### **1️⃣ Inserisci l'url di una pagina web contenente almeno una Tabella **")
@@ -478,7 +478,7 @@ def main():
 
 	
 	Menu = option_menu("La miglior Suite DataScience 🐍🔥", ["Analizza i Tuoi File CSV - Analytic Suite", "Scarica Tabelle da Pagine web - WebScrape Siute", "Trasforma i tuoi pdf in file csv da analizzare", "Usa la nostra versione di Excel"],
-				 icons=['clipboard2-data-fill', 'globe', 'filetype-pdf', 'file-earmark-spreadsheet'],
+				 icons=['clipboard-data', 'globe', 'file-pdf', 'file-earmark-spreadsheet'],
 				 menu_icon="app-indicator", default_index=0,orientation='horizontal',
 				 styles={
 "container": {"padding": "5!important", "background-color": "#fafafa", "width": "100%"},
