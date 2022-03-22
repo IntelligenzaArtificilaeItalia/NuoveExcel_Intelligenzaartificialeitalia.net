@@ -585,8 +585,8 @@ def main():
 				"nav-link": {"color": "blak","font-size": "16px", "text-align": "left", "margin":"0px", "--hover-color": "#eee"},
 				"nav-link-selected": {"color": "blak","background-color": "#02ab21"},
 				}
-				)
 	)
+	
 
 	if Menu == "Analytic Suite" :
 		AnalyticSuite()
