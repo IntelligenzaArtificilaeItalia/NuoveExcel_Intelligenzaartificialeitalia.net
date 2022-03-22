@@ -488,16 +488,16 @@ def NuovoExcel():
 		gb.configure_default_column(editable=True)
 
 		gb.configure_grid_options(enableRangeSelection=True)
-
-		response = AgGrid(
-		    df,
-		    height=800, 
-		    width='100%',
-		    gridOptions=gb.build(),
-		    fit_columns_on_grid_load=True,
-		    allow_unsafe_jscode=True,
-		    enable_enterprise_modules=True
-		)
+		with st.spinner('Aspetta un attimo...'):
+			response = AgGrid(
+			    df,
+			    height=800, 
+			    width='100%',
+			    gridOptions=gb.build(),
+			    fit_columns_on_grid_load=True,
+			    allow_unsafe_jscode=True,
+			    enable_enterprise_modules=True
+			)
 	if( operazione == "Partire dal mio set di dati"):
 		uploaded_file_2 = st.file_uploader("Perfavore inserisci quì il file di tipo csv, usando come separatore la virgola!", type=["csv"])
 
@@ -510,24 +510,53 @@ def NuovoExcel():
 			gb.configure_default_column(editable=True)
 
 			gb.configure_grid_options(enableRangeSelection=True)
+			with st.spinner('Aspetta un attimo...'):
+				response = AgGrid(
+				    dataset,
+				    height=800, 
+				    width='100%',
+				    gridOptions=gb.build(),
+				    fit_columns_on_grid_load=True,
+				    allow_unsafe_jscode=True,
+				    enable_enterprise_modules=True
+				)
 
-			response = AgGrid(
-			    dataset,
-			    height=800, 
-			    width='100%',
-			    gridOptions=gb.build(),
-			    fit_columns_on_grid_load=True,
-			    allow_unsafe_jscode=True,
-			    enable_enterprise_modules=True
-			)
 
-  
+
+def convertiExcel():
+
+	operazione1 = st.selectbox("Cosa ti serve ?", ["Da .xlsx a .csv", "Da .csv a .xlsx"])
+	if( operazione1 == "Da .xlsx a .csv"):
+		uploaded_file_2 = st.file_uploader("Perfavore inserisci quì il file di tipo .xlsx ", type=["xlsx"])
+
+		if uploaded_file_2 is not None:
+			df = pd.read_excel(uploaded_file_2)
+			towrite = io.BytesIO()
+			downloaded_file = df.to_csv (towrite, encoding='utf-8', index = None, header=True)
+			towrite.seek(0)  # reset pointer
+			b64 = base64.b64encode(towrite.read()).decode()  # some strings
+			linko= f'<a href="data:application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;base64,{b64}" download="DatasetConvertito.csv">Scarica il Datset Convertito in .csv</a>'
+			st.markdown(linko, unsafe_allow_html=True)
+
+	if( operazione1 == "Da .csv a .xlsx"):
+		uploaded_file_2 = st.file_uploader("Perfavore inserisci quì il file di tipo .csv ", type=["csv"])
+
+		if uploaded_file_2 is not None:
+			df = pd.read_csv(uploaded_file_2)
+			towrite = io.BytesIO()
+			downloaded_file = df.to_excel (towrite, encoding='utf-8', index = None, header=True)
+			towrite.seek(0)  # reset pointer
+			b64 = base64.b64encode(towrite.read()).decode()  # some strings
+			linko= f'<a href="data:application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;base64,{b64}" download="DatasetConvertito.xlsx">Scarica il Datset Convertito in .xlsx</a>'
+			st.markdown(linko, unsafe_allow_html=True)
+
+
 #################MAIN
 
 def main():
 
 	
-	Menu = option_menu("La miglior Suite DataScience 🐍🔥", ["Analytic Suite", "WebScrape Siute", "Da pdf a Csv", "Excel Online"],
+	Menu = option_menu("La miglior Suite DataScience 🐍🔥", ["Analytic Suite", "WebScrape Siute", "Da pdf a Csv", "Da excel a csv", "Excel Online"],
 				 icons=['clipboard-data', 'globe', 'file-pdf', 'file-earmark-spreadsheet'],
 				 menu_icon="app-indicator", default_index=0,orientation='horizontal',
 				 styles={
@@ -546,6 +575,8 @@ def main():
 		pdftocsv()
 	if Menu == "Excel Online" :
 		NuovoExcel()
+	if Menu == "Da excel a csv" :
+		convertiExcel()
 
 
 	
