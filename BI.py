@@ -45,6 +45,10 @@ hide_st_style = """
             """
 st.markdown(hide_st_style, unsafe_allow_html=True)
 
+st.write(" ")
+st.write(" ")
+st.write(" ")
+
 @st.cache(allow_output_mutation=True, persist=True)
 def reading_dataset():
     global dataset
@@ -573,15 +577,14 @@ def main():
 
 	
 	Menu = option_menu("La miglior Suite DataScience 🐍🔥", ["Analytic Suite", "WebScrape Siute", "Da pdf a Csv", "Da excel a csv", "Excel Online"],
-				 icons=['clipboard-data', 'globe', 'file-pdf', 'file-earmark-spreadsheet'],
 				 menu_icon="app-indicator", default_index=0,orientation='horizontal',
 				 styles={
-"container": {"padding": "5!important", "background-color": "#fafafa", "width": "100%"},
-"icon": {"color": "blue", "font-size": "15px"}, 
-"nav-link": {"font-size": "16px", "text-align": "left", "margin":"0px", "--hover-color": "#eee"},
-"nav-link-selected": {"background-color": "#02ab21"},
-}
-)
+				"container": {"padding": "5!important", "background-color": "#fafafa", "width": "100%"},
+				"icon": {"color": "blak", "font-size": "15px"}, 
+				"nav-link": {"color": "blak","font-size": "16px", "text-align": "left", "margin":"0px", "--hover-color": "#eee"},
+				"nav-link-selected": {"color": "blak","background-color": "#02ab21"},
+	}
+	)
 
 	if Menu == "Analytic Suite" :
 		AnalyticSuite()
