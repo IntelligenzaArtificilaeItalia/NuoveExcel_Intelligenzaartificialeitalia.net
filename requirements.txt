@@ -1,6 +1,7 @@
 requests
 streamlit-aggrid
 pandas
+jinja2
 lxml
 tabula-py
 pandasql==0.7.3
