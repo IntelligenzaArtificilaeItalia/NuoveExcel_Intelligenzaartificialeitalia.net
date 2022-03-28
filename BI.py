@@ -566,7 +566,7 @@ def convertiExcel():
 		if uploaded_file_2 is not None:
 			df = pd.read_csv(uploaded_file_2)
 			df_xlsx = to_excel(df)
-			st.download_button(label='📥 Scarica il Datset Convertito in .xlx',
+			st.download_button(label='📥 Scarica il Datset Convertito in .xls',
 						        data=df_xlsx ,
 						        file_name= 'DatasetConvertito.xlsx')
 			
